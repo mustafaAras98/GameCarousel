@@ -1,0 +1,91 @@
+# macOS sistem dosyaları
+.DS_Store
+*.swp
+
+# Xcode (iOS)
+build/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata/
+*.xccheckout
+*.moved-aside
+DerivedData/
+*.hmap
+*.ipa
+*.xcuserstate
+**/.xcode.env.local
+
+# Android / IntelliJ
+android/.gradle/
+android/.idea/
+android/app/build/
+android/build/
+android/app/src/main/assets/index.android.bundle
+android/app/src/main/res/drawable-*
+android/app/src/main/res/raw/
+local.properties
+*.iml
+*.hprof
+.cxx/
+*.keystore
+!debug.keystore
+.kotlin/
+
+# Node.js bağımlılıkları
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# Metro bundler cache
+.metro-health-check*
+metro-cache/
+
+# Çıktı ve log dosyaları
+*.log
+*.lock
+*.tsbuildinfo
+
+# IDE / Editör dosyaları
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Fastlane (Eğer kullanmıyorsan kaldır)
+**/fastlane/report.xml
+**/fastlane/Preview.html
+**/fastlane/screenshots/
+**/fastlane/test_output/
+
+# Bundle artifact
+*.jsbundle
+
+# Ruby / CocoaPods (iOS bağımlılıkları)
+ios/Pods/
+ios/build/
+ios/DerivedData/
+ios/*.xcodeproj/project.xcworkspace/
+ios/*.xcuserdata/
+Gemfile.lock
+/vendor/bundle/
+
+# Test ve geçici dosyalar
+__tests__/coverage/
+jest-cache/
+coverage/
+.nyc_output/
+
+# Watchman dosyası
+.watchmanconfig
+
+# Expo özel dosyaları (Eğer kullanıyorsan)
+.expo/
+.expo-shared/
