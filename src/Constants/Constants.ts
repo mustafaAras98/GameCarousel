@@ -1,5 +1,3 @@
-// Constants.ts
-
 import {Dimensions, Platform} from 'react-native';
 
 //---------------------------------------------------------------------
@@ -11,7 +9,7 @@ const {width: screenWidth} = Dimensions.get('window');
 // Referans alınan temel ekran genişliği (Örn: Realme 7 Pro)
 const baseScreenWidth = 360;
 
-// Ölçekleme faktörü (genişliğe göre)
+// Ölçekleme faktörü
 const scaleFactor = screenWidth / baseScreenWidth;
 
 //---------------------------------------------------------------------
@@ -21,20 +19,19 @@ const scaleFactor = screenWidth / baseScreenWidth;
 /**
  * Yuvarlatma tipi seçenekleri.
  */
-export type RadiusType = 'small' | 'medium' | 'large' | 'pill' | 'circle';
+export enum RadiusType {
+  Small = 'small',
+  Medium = 'medium',
+  Large = 'large',
+  Pill = 'pill',
+  Circle = 'circle',
+}
 
 // Temel yarıçap değerleri (referans ekran genişliği için)
 const baseRadius = {
   small: 8,
   medium: 12,
   large: 16,
-};
-
-// Ölçeklenmiş ve minimum değerlerle sınırlandırılmış yarıçaplar
-const scaledRadius = {
-  small: Math.max(4, Math.round(baseRadius.small * scaleFactor)),
-  medium: Math.max(8, Math.round(baseRadius.medium * scaleFactor)),
-  large: Math.max(12, Math.round(baseRadius.large * scaleFactor)),
 };
 
 /**
@@ -45,21 +42,23 @@ const scaledRadius = {
  */
 export const getBorderRadius = (
   radiusType: RadiusType,
-  height: number
+  height?: number
 ): number => {
   switch (radiusType) {
-    case 'small':
-      return scaledRadius.small;
-    case 'medium':
-      return scaledRadius.medium;
-    case 'large':
-      return scaledRadius.large;
-    case 'pill':
-    case 'circle': // Hem pill hem de circle için yükseklik/2 kullanılır.
-      // Circle için width === height olması gerektiği kullanıcıya bağlıdır.
+    case RadiusType.Small:
+      return Math.max(4, Math.round(baseRadius.small * scaleFactor));
+    case RadiusType.Medium:
+      return Math.max(8, Math.round(baseRadius.medium * scaleFactor));
+    case RadiusType.Large:
+      return Math.max(12, Math.round(baseRadius.large * scaleFactor));
+    case RadiusType.Pill:
+    case RadiusType.Circle:
+      if (height === undefined) {
+        throw new Error(
+          `'height' parameter is required for '${radiusType}' radius type`
+        );
+      }
       return height / 2;
-    default:
-      return 0;
   }
 };
 
