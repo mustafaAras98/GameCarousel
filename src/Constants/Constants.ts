@@ -161,8 +161,14 @@ export const Colors = {
     Warning: '#d38e24',
   },
   ThemeSwitch: {
-    On: '#b2d8d8',
-    Off: '#222222',
+    Track: {
+      On: '#b2d8d8',
+      Off: '#222222',
+    },
+    Icons: {
+      On: '#e3d539',
+      Off: '#343d4a',
+    },
   },
 };
 
