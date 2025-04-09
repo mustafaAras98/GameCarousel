@@ -70,7 +70,7 @@ export const getBorderRadius = (
 const baseFontSizes = {
   xxs: 10,
   xs: 12,
-  small: 14, // Genellikle gövde metni
+  small: 14,
   medium: 16,
   large: 18,
   xl: 20,
@@ -108,7 +108,30 @@ export const scaleFontSize = (
 };
 
 //---------------------------------------------------------------------
-// 4. Diğer Sabitler
+// 4. Padding
+//---------------------------------------------------------------------
+
+export enum BasePadding {
+  xxs = 2,
+  xs = 4,
+  small = 6,
+  medium = 8,
+  large = 12,
+  xl = 16,
+  xxl = 20,
+}
+export enum BasePaddingPercentage {
+  xxs = '2%',
+  xs = '4%',
+  small = '6%',
+  medium = '8%',
+  large = '12%',
+  xl = '16%',
+  xxl = '20%',
+}
+
+//---------------------------------------------------------------------
+// 999. Diğer Sabitler
 //---------------------------------------------------------------------
 
 // Renk Sabitleri
@@ -136,6 +159,10 @@ export const Colors = {
     Error: '#f44336',
     Success: '#559e5c',
     Warning: '#d38e24',
+  },
+  ThemeSwitch: {
+    On: '#b2d8d8',
+    Off: '#222222',
   },
 };
 
