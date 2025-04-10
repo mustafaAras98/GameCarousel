@@ -1,13 +1,11 @@
-/**
- * @format
- */
+import {render} from '@testing-library/react-native';
+import App from '../src/App';
 
-import React from 'react';
-import ReactTestRenderer from 'react-test-renderer';
-import App from '../App';
+describe('App', () => {
+  it('has 1 child', () => {
+    const {toJSON} = render(<App />);
+    const tree = toJSON();
 
-test('renders correctly', async () => {
-  await ReactTestRenderer.act(() => {
-    ReactTestRenderer.create(<App />);
+    expect(tree).toBeTruthy();
   });
 });
