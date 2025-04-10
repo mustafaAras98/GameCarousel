@@ -8,7 +8,7 @@ const config: Config = {
   setupFilesAfterEnv: ['./setup-jest.ts'],
   testEnvironment: 'jsdom',
   transformIgnorePatterns: [
-    'node_modules/(?!(react-native|@react-native|@react-navigation|@testing-library)/)',
+    'node_modules/(?!(react-native|@react-native|@testing-library|react-native-reanimated)/)',
   ],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
 };
