@@ -9,7 +9,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
-import {Theme, useThemeStore} from '../../Stores/themeStore';
+import {useThemeStore, ThemeType} from '../../Stores/themeStore';
 
 import {styles} from './ThemeSwitch.style';
 import {BasePadding, Colors} from '../../Constants/Constants';
@@ -52,10 +52,10 @@ const ThemeSwitch: React.FC<ThemeSwitchProps> = ({
 
   const setTheme = useThemeStore((state) => state.setTheme);
   const theme = useThemeStore((state) => state.theme);
-  const isOn = theme === Theme.LightTheme;
+  let isOn = theme === ThemeType.LightTheme;
 
   const handleThemeSwitchPress = () => {
-    setTheme(isOn ? Theme.DarkTheme : Theme.LightTheme);
+    setTheme(isOn ? ThemeType.DarkTheme : ThemeType.LightTheme);
   };
 
   useEffect(() => {
@@ -104,6 +104,7 @@ const ThemeSwitch: React.FC<ThemeSwitchProps> = ({
 
   return (
     <Pressable
+      testID="ThemeSwitchPressable"
       accessibilityRole="switch"
       accessibilityState={{checked: isOn}}
       accessibilityLabel="Tema Değiştir"
