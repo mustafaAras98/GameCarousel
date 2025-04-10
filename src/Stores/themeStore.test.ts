@@ -2,7 +2,7 @@ import {renderHook, act} from '@testing-library/react-native';
 
 import {Appearance} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useThemeStore, ThemeType} from './themeStore'; // Update the import path
+import {useThemeStore, ThemeType} from './themeStore';
 
 jest.mock('react-native', () => ({
   Appearance: {
