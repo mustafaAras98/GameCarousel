@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useMemo, useRef, useState} from 'react';
 import {LayoutChangeEvent, Pressable} from 'react-native';
 
 import Animated, {
@@ -11,8 +11,7 @@ import Animated, {
 
 import {useThemeStore, ThemeType} from '../../Stores/themeStore';
 
-import {styles} from './ThemeSwitch.style';
-import {BasePadding, Colors} from '../../Constants/Constants';
+import {Colors, scaledPadding} from '../../Constants/Constants';
 import Icon from '@react-native-vector-icons/ionicons';
 
 type IoniconName = React.ComponentProps<typeof Icon>['name'];
@@ -32,7 +31,6 @@ interface ThemeSwitchProps {
     off: string;
   };
 }
-
 const ThemeSwitch: React.FC<ThemeSwitchProps> = ({
   duration = 600,
   icons = {on: 'sunny', off: 'moon'},
@@ -45,10 +43,15 @@ const ThemeSwitch: React.FC<ThemeSwitchProps> = ({
     off: Colors.ThemeSwitch.Track.Off,
   },
 }) => {
-  const [trackSize, setTrackSize] = useState({width: 50, height: 20});
+  const [trackSize, setTrackSize] = useState({width: 120, height: 40});
+  const [thumbSizeHeight, setThumbSizeHeight] = useState(40);
   const rotation = useSharedValue(0);
   const targetRotation = useRef(0);
-  const iconSize = Math.max(12, trackSize.height - BasePadding.medium * 3);
+
+  const iconSize = useMemo(
+    () => Math.max(12, thumbSizeHeight - scaledPadding.xxs * 2),
+    [thumbSizeHeight]
+  );
 
   const setTheme = useThemeStore((state) => state.setTheme);
   const theme = useThemeStore((state) => state.theme);
@@ -62,7 +65,7 @@ const ThemeSwitch: React.FC<ThemeSwitchProps> = ({
     const newTarget = targetRotation.current + 360;
     targetRotation.current = newTarget;
     rotation.value = withTiming(newTarget, {duration});
-  }, [duration, rotation, isOn]);
+  }, [theme, duration, rotation]);
 
   const trackAnimatedStyle = useAnimatedStyle(() => {
     const color = interpolateColor(
@@ -94,11 +97,7 @@ const ThemeSwitch: React.FC<ThemeSwitchProps> = ({
 
   const iconAnimatedStyle = useAnimatedStyle(() => {
     return {
-      transform: [
-        {
-          rotate: `${rotation.value}deg`,
-        },
-      ],
+      transform: [{rotate: `${rotation.value}deg`}],
     };
   });
 
@@ -108,21 +107,33 @@ const ThemeSwitch: React.FC<ThemeSwitchProps> = ({
       accessibilityRole="switch"
       accessibilityState={{checked: isOn}}
       accessibilityLabel="Tema Değiştir"
-      style={styles.Container}
+      className="flex w-full h-full items-center justify-center"
       onPress={handleThemeSwitchPress}>
       <Animated.View
+        className="w-full h-full rounded-full justify-center items-start"
         onLayout={(e: LayoutChangeEvent) => {
           setTrackSize({
             width: e.nativeEvent.layout.width,
             height: e.nativeEvent.layout.height,
           });
         }}
-        style={[styles.Track, trackAnimatedStyle]}>
-        <Animated.View style={[styles.Thumb, thumbAnimatedStyle]}>
-          <Animated.View style={[styles.IconContainer, iconAnimatedStyle]}>
+        style={[
+          {
+            padding: scaledPadding.xxs,
+            ...(trackSize.height >= trackSize.width && {aspectRatio: 1}),
+          },
+          trackAnimatedStyle,
+        ]}>
+        <Animated.View
+          className="bg-white aspect-square rounded-full"
+          onLayout={(e: LayoutChangeEvent) => {
+            setThumbSizeHeight(e.nativeEvent.layout.height);
+          }}
+          style={thumbAnimatedStyle}>
+          <Animated.View
+            className=" w-full h-full items-center justify-center"
+            style={iconAnimatedStyle}>
             <Icon
-              style={styles.Icon}
-              adjustsFontSizeToFit
               size={iconSize}
               name={isOn ? icons.on : icons.off}
               color={isOn ? iconColors.on : iconColors.off}
