@@ -13,56 +13,6 @@ const baseScreenWidth = 360;
 const scaleFactor = screenWidth / baseScreenWidth;
 
 //---------------------------------------------------------------------
-// 2. Border Radius Hesaplamaları
-//---------------------------------------------------------------------
-
-/**
- * Yuvarlatma tipi seçenekleri.
- */
-export enum RadiusType {
-  Small = 'small',
-  Medium = 'medium',
-  Large = 'large',
-  Pill = 'pill',
-  Circle = 'circle',
-}
-
-// Temel yarıçap değerleri (referans ekran genişliği için)
-const baseRadius = {
-  small: 8,
-  medium: 12,
-  large: 16,
-};
-
-/**
- * Verilen yuvarlatma tipi ve yüksekliğe göre borderRadius değerini hesaplar.
- * @param radiusType - İstenen yuvarlatma tipi.
- * @param height - Elemanın yüksekliği.
- * @returns Hesaplanan borderRadius değeri.
- */
-export const getBorderRadius = (
-  radiusType: RadiusType,
-  height?: number
-): number => {
-  switch (radiusType) {
-    case RadiusType.Small:
-      return Math.max(4, Math.round(baseRadius.small * scaleFactor));
-    case RadiusType.Medium:
-      return Math.max(8, Math.round(baseRadius.medium * scaleFactor));
-    case RadiusType.Large:
-      return Math.max(12, Math.round(baseRadius.large * scaleFactor));
-    case RadiusType.Pill:
-    case RadiusType.Circle:
-      if (height === undefined) {
-        throw new Error(
-          `'height' parameter is required for '${radiusType}' radius type`
-        );
-      }
-      return height / 2;
-  }
-};
-
-//---------------------------------------------------------------------
 // 3. Font Boyutu Ölçekleme
 //---------------------------------------------------------------------
 
@@ -120,15 +70,15 @@ export enum BasePadding {
   xl = 16,
   xxl = 20,
 }
-export enum BasePaddingPercentage {
-  xxs = '2%',
-  xs = '4%',
-  small = '6%',
-  medium = '8%',
-  large = '12%',
-  xl = '16%',
-  xxl = '20%',
-}
+export const scaledPadding = {
+  xxs: Math.max(2, Math.round(baseFontSizes.xxs * scaleFactor)),
+  xs: Math.max(3, Math.round(baseFontSizes.xs * scaleFactor)),
+  small: Math.max(5, Math.round(baseFontSizes.small * scaleFactor)),
+  medium: Math.max(7, Math.round(baseFontSizes.medium * scaleFactor)),
+  large: Math.max(11, Math.round(baseFontSizes.large * scaleFactor)),
+  xl: Math.max(15, Math.round(baseFontSizes.xl * scaleFactor)),
+  xxl: Math.max(19, Math.round(baseFontSizes.xxl * scaleFactor)),
+};
 
 //---------------------------------------------------------------------
 // 999. Diğer Sabitler
