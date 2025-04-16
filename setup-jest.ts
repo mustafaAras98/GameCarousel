@@ -23,3 +23,8 @@ jest.mock('@react-native-vector-icons/ionicons', () => {
 
   return MockIcon;
 });
+
+jest.mock(
+  'react-native/Libraries/Components/StatusBar/StatusBar',
+  () => 'StatusBar'
+);
