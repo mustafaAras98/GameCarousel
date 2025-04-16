@@ -11,7 +11,8 @@ import Animated, {
 
 import {useThemeStore, ThemeType} from '../../Stores/themeStore';
 
-import {Colors, scaledPadding} from '../../Constants/Constants';
+import {scaledPadding} from '../../Constants/Constants';
+import {Colors} from '../../Constants/Colors';
 import Icon from '@react-native-vector-icons/ionicons';
 
 type IoniconName = React.ComponentProps<typeof Icon>['name'];
