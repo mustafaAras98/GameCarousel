@@ -1,16 +1,19 @@
-import {View, useWindowDimensions} from 'react-native';
-import React from 'react';
+import {View, useWindowDimensions, NativeModules} from 'react-native';
+import React, {useEffect} from 'react';
 import Animated, {
   useAnimatedScrollHandler,
   useSharedValue,
 } from 'react-native-reanimated';
+
 import GameLogoSlider from './GamesLogoSlider';
 import Card from './Card';
+
 import {games} from '../../Models/Games';
 
 interface GameSelectionCarouselI {
   cardHeight: number;
 }
+const {SoundModule} = NativeModules;
 
 const GameSelectionCarousel: React.FC<GameSelectionCarouselI> = ({
   cardHeight,
@@ -25,6 +28,14 @@ const GameSelectionCarousel: React.FC<GameSelectionCarouselI> = ({
     },
   });
 
+  useEffect(() => {
+    SoundModule.loadSound('click', 'card_button_click');
+
+    return () => {
+      SoundModule.unloadSound('click');
+    };
+  }, []);
+
   return (
     <View className="flex-1 bg-lightbackground dark:bg-darkbackground items-center">
       <Animated.ScrollView
@@ -33,9 +44,7 @@ const GameSelectionCarousel: React.FC<GameSelectionCarouselI> = ({
         scrollEventThrottle={4}
         decelerationRate="fast"
         snapToInterval={width}
-        showsHorizontalScrollIndicator={false}
-        /* contentContainerClassName="items-center justify-center" */
-      >
+        showsHorizontalScrollIndicator={false}>
         {games.map((game, index) => (
           <View style={{height: cardHeight}} key={index}>
             <Card game={game} width={width} key={index} />
@@ -53,4 +62,4 @@ const GameSelectionCarousel: React.FC<GameSelectionCarouselI> = ({
   );
 };
 
-export default GameSelectionCarousel;
+export default React.memo(GameSelectionCarousel);

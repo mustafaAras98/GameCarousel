@@ -1,4 +1,10 @@
-import {StatusBar, SafeAreaView, View} from 'react-native';
+import {
+  StatusBar,
+  SafeAreaView,
+  View,
+  Platform,
+  StyleSheet,
+} from 'react-native';
 import React, {useEffect} from 'react';
 import {ThemeType, useThemeStore} from './Stores/themeStore';
 import {Colors} from './Constants/Colors';
@@ -22,13 +28,14 @@ const App = () => {
   useEffect(() => {
     const nativewindScheme = theme === ThemeType.DarkTheme ? 'dark' : 'light';
     if (colorScheme !== nativewindScheme) {
-      console.log(`Syncing NativeWind scheme to: ${nativewindScheme}`);
       setColorScheme(nativewindScheme);
     }
   }, [theme, setColorScheme, colorScheme]);
 
   return (
-    <SafeAreaView className={`flex-1 ${isDarkMode ? 'dark' : ''}`}>
+    <SafeAreaView
+      className={`flex-1 ${isDarkMode ? 'dark' : ''}`}
+      style={style.AndroidSafeArea}>
       <StatusBar
         backgroundColor={
           isDarkMode
@@ -37,7 +44,6 @@ const App = () => {
         }
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
       />
-
       <View className="flex-1 h-screen w-screen bg-lightbackground dark:bg-darkbackground">
         <GameSelectionCarousel cardHeight={400} />
       </View>
@@ -49,3 +55,9 @@ const App = () => {
 };
 
 export default App;
+
+const style = StyleSheet.create({
+  AndroidSafeArea: {
+    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+  },
+});
