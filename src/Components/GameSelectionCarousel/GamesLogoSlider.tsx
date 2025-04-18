@@ -59,4 +59,4 @@ const GameLogoSlider: React.FC<GamesInterface> = ({x, width, height}) => {
   );
 };
 
-export default GameLogoSlider;
+export default React.memo(GameLogoSlider);

@@ -1,5 +1,5 @@
 import React, {useEffect, useMemo, useRef, useState} from 'react';
-import {LayoutChangeEvent, Pressable} from 'react-native';
+import {LayoutChangeEvent, Pressable, NativeModules} from 'react-native';
 
 import Animated, {
   interpolate,
@@ -32,6 +32,9 @@ interface ThemeSwitchProps {
     off: string;
   };
 }
+
+const {SoundModule} = NativeModules;
+
 const ThemeSwitch: React.FC<ThemeSwitchProps> = ({
   duration = 600,
   icons = {on: 'sunny', off: 'moon'},
@@ -54,11 +57,20 @@ const ThemeSwitch: React.FC<ThemeSwitchProps> = ({
     [thumbSizeHeight]
   );
 
+  useEffect(() => {
+    SoundModule.loadSound('switch', 'light_switch');
+
+    return () => {
+      SoundModule.unloadSound('switch');
+    };
+  }, []);
+
   const setTheme = useThemeStore((state) => state.setTheme);
   const theme = useThemeStore((state) => state.theme);
   let isOn = theme === ThemeType.LightTheme;
 
   const handleThemeSwitchPress = () => {
+    SoundModule.playSound('switch');
     setTheme(isOn ? ThemeType.DarkTheme : ThemeType.LightTheme);
   };
 
@@ -146,4 +158,4 @@ const ThemeSwitch: React.FC<ThemeSwitchProps> = ({
   );
 };
 
-export default ThemeSwitch;
+export default React.memo(ThemeSwitch);
