@@ -1,8 +1,11 @@
+import {ImageSourcePropType} from 'react-native';
+
 export interface GamesType {
   title: string;
   color: string;
   description: string;
-  imgSrc: any;
+  imgSrc: ImageSourcePropType;
+  isPublished: boolean;
 }
 
 export const games = [
@@ -12,6 +15,7 @@ export const games = [
     description:
       'Klasik strateji oyunu. İki oyuncu sırayla taşlarını hareket ettirerek rakibin şahını mat etmeye çalışır.',
     imgSrc: require('../Assets/Images/chess.png'),
+    isPublished: true,
   },
   {
     title: 'Roulette',
@@ -19,6 +23,7 @@ export const games = [
     description:
       'Bir çark ve top üzerinden oynanan şans oyunu. Oyuncular sayı, renk veya aralık üzerine bahis yapar. Topun durduğu yer sonucu belirler.',
     imgSrc: require('../Assets/Images/roulette.png'),
+    isPublished: true,
   },
   {
     title: 'BlackJack',
@@ -26,6 +31,7 @@ export const games = [
     description:
       'Amaç 21’e en yakın el değerine ulaşmak. Oyuncular ve krupiye kart çeker, 21’i geçmeden en yüksek sayıya ulaşmaya çalışır.',
     imgSrc: require('../Assets/Images/blackjack.png'),
+    isPublished: true,
   },
   {
     title: 'Card Memoization',
@@ -33,6 +39,7 @@ export const games = [
     description:
       "Kullanıcı kapalı kartları çevirerek eşleşenleri bulmaya çalışır. Hafızayı test eder. Genellikle 4x4, 6x6 gibi kart grid'leri ile oynanır. ",
     imgSrc: require('../Assets/Images/cardmemo.png'),
+    isPublished: true,
   },
   {
     title: 'Scratch Card',
@@ -40,6 +47,7 @@ export const games = [
     description:
       'Kullanıcı bir yüzeyi “kazıyarak” altındaki ödülü görür. Şans oyunu türüdür. Görsel etkileşim ve dokunmatik kazıma efekti ile eğlencelidir.',
     imgSrc: require('../Assets/Images/comingsoon.png'),
+    isPublished: false,
   },
   {
     title: 'Whack-a-Mole',
@@ -47,6 +55,7 @@ export const games = [
     description:
       'Belirli aralıklarla çıkan köstebeklere hızlıca tıklama oyunu. Zaman ve refleks odaklıdır, hız arttıkça zorluk da artar.',
     imgSrc: require('../Assets/Images/comingsoon.png'),
+    isPublished: false,
   },
   {
     title: 'Dice Roller',
@@ -54,6 +63,7 @@ export const games = [
     description:
       'Zar atılarak rastgele sayılar elde edilir. Şansa dayalı küçük oyunlarda temel bileşen olarak kullanılabilir.',
     imgSrc: require('../Assets/Images/comingsoon.png'),
+    isPublished: false,
   },
   {
     title: 'Math Quiz',
@@ -61,6 +71,7 @@ export const games = [
     description:
       'Toplama, çıkarma gibi basit işlemler üzerinden rastgele sorularla zihinsel işlem yapma oyunu.',
     imgSrc: require('../Assets/Images/comingsoon.png'),
+    isPublished: false,
   },
   {
     title: 'Tap the Color',
@@ -68,6 +79,7 @@ export const games = [
     description:
       'Ekranda anlık değişen renkleri doğru zamanda tıklama. Dikkat ve refleks gerektirir.',
     imgSrc: require('../Assets/Images/comingsoon.png'),
+    isPublished: false,
   },
   {
     title: 'Word Unscramble',
@@ -75,6 +87,7 @@ export const games = [
     description:
       'Karışık harflerden doğru kelimeyi bulma oyunu. Kelime dağarcığını test eder.',
     imgSrc: require('../Assets/Images/comingsoon.png'),
+    isPublished: false,
   },
   {
     title: 'Rock Paper Scissors',
@@ -82,6 +95,7 @@ export const games = [
     description:
       'Taş, Kağıt, Makas klasik oyunu. Oyuncu seçer, sistem rastgele seçer, kazanan belirlenir.',
     imgSrc: require('../Assets/Images/comingsoon.png'),
+    isPublished: false,
   },
   {
     title: 'Number Guessing Game',
@@ -89,6 +103,7 @@ export const games = [
     description:
       'Sistem 1-100 arasında bir sayı tutar. Oyuncu tahmin eder, sistem yönlendirir: Yukarı ya da Aşağı.',
     imgSrc: require('../Assets/Images/comingsoon.png'),
+    isPublished: false,
   },
   {
     title: 'Balloon Popper',
@@ -96,5 +111,6 @@ export const games = [
     description:
       'Ekranda çıkan balonları zamanında patlatma. Hızlı refleks ve dikkat gerektirir.',
     imgSrc: require('../Assets/Images/comingsoon.png'),
+    isPublished: false,
   },
 ];
