@@ -71,20 +71,25 @@ const Card: React.FC<CardInterface> = ({game, width}) => {
         marginHorizontal: marginH,
       }}>
       <View
-        className="flex-1 rounded-3xl justify-between p-4"
+        className="flex-1 rounded-3xl justify-between p-2"
         style={[{backgroundColor: game.color}, style(isDarkMode).cardShadow]}>
-        <View className="basis-2/5">
-          <View className="grow p-4 justify-center items-center">
+        <View className="basis-2/5 p-4">
+          <View
+            accessibilityRole="header"
+            accessibilityLabel={game.title}
+            className="grow p-4 justify-center items-center">
             <Text
               adjustsFontSizeToFit
-              className="text-lightext dark:text-darktext text-3xl font-bold tracking-wide line-clamp-1 align-middle text-center">
+              className="text-lightext text-3xl font-bold tracking-wide line-clamp-1 align-middle text-center">
               {game.title}
             </Text>
           </View>
-          <View className="grow rounded-b-2xl justify-center items-center ">
+          <View
+            className="grow rounded-b-2xl justify-center items-center"
+            accessibilityLabel={game.description}>
             <Text
               adjustsFontSizeToFit
-              className="text-base font-medium align-middle text-center">
+              className="text-base text-lightext font-medium align-middle text-center">
               {game.description}
             </Text>
           </View>
@@ -97,9 +102,12 @@ const Card: React.FC<CardInterface> = ({game, width}) => {
               className="bg-amber-950 w-full h-3/5 rounded-full justify-center items-center"
               onPressIn={handlePressIn}
               onPressOut={handlePressOut}
-              activeOpacity={0.8}>
+              activeOpacity={0.8}
+              accessibilityRole="button"
+              accessibilityLabel={`Play ${game.title}`}
+              accessibilityHint="Tap to start the game">
               <Text className="text-base text-darktext dark:text-darktext font-medium align-middle text-center">
-                Try it
+                Oyna
               </Text>
             </TouchableOpacity>
           </Animated.View>

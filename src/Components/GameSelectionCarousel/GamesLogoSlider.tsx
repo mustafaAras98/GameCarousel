@@ -14,8 +14,8 @@ interface GamesInterface {
 }
 
 const GameLogoSlider: React.FC<GamesInterface> = ({x, width, height}) => {
-  const marginTop = height * 0.4;
-  const marginBot = height * 0.2;
+  const marginTop = height * 0.41;
+  const marginBot = height * 0.21;
   return (
     <View
       className="flex-1 justify-center items-center"
@@ -44,12 +44,12 @@ const GameLogoSlider: React.FC<GamesInterface> = ({x, width, height}) => {
             className="justify-center items-center"
             style={[{...StyleSheet.absoluteFillObject}, animatedStyle]}>
             <Image
+              accessible={false}
+              resizeMode="contain"
               source={game.imgSrc}
-              // eslint-disable-next-line react-native/no-inline-styles
               style={{
                 width: height - marginBot - marginTop,
                 height: height - marginBot - marginTop,
-                objectFit: 'contain',
               }}
             />
           </Animated.View>
