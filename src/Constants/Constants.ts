@@ -4,10 +4,15 @@ import {Dimensions, Platform} from 'react-native';
 // 1. Ekran Boyutları ve Ölçekleme Faktörü
 //---------------------------------------------------------------------
 
-const {width: screenWidth} = Dimensions.get('window');
+const {width: screenWidth, height: screenHeight} = Dimensions.get('window');
 
 // Referans alınan temel ekran genişliği (Örn: Realme 7 Pro)
 const baseScreenWidth = 360;
+const baseScreenHeight = 720;
+
+export const scale = (size: number) => (screenWidth / baseScreenWidth) * size;
+export const verticalScale = (size: number) =>
+  (screenHeight / baseScreenHeight) * size;
 
 // Ölçekleme faktörü
 const scaleFactor = screenWidth / baseScreenWidth;

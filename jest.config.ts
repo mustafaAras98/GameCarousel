@@ -8,7 +8,7 @@ const config: Config = {
   setupFilesAfterEnv: ['./setup-jest.ts'],
   testEnvironment: 'jsdom',
   transformIgnorePatterns: [
-    'node_modules/(?!(react-native|@react-native|@testing-library|react-native-reanimated|nativewind|react-native-css-interop)/)',
+    'node_modules/(?!(react-native|@react-native|@testing-library|react-native-reanimated|nativewind|react-native-css-interop|@shopify/react-native-skia)/)',
   ],
   moduleNameMapper: {
     '\\.(css|less|sass|scss)$': '<rootDir>/__mocks__/styleMock.js',

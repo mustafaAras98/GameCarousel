@@ -426,7 +426,7 @@ function GameMarquee() {
 
 const styles = StyleSheet.create({
   gameShadow: {
-    shadowColor: Colors.DarkTheme.background,
+    shadowColor: Colors.DarkTheme.Background,
     shadowOffset: {
       width: 0,
       height: 1,
