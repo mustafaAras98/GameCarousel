@@ -57,7 +57,7 @@ const Card: React.FC<CardInterface> = ({game, width}) => {
         easing: Easing.out(Easing.quad),
       }),
       withTiming(1, {
-        duration: 500,
+        duration: 800,
         easing: Easing.elastic(1),
       })
     );
@@ -85,7 +85,7 @@ const Card: React.FC<CardInterface> = ({game, width}) => {
             </Text>
           </View>
           <View
-            className="grow rounded-b-2xl justify-center items-center"
+            className="grow justify-center items-center"
             accessibilityLabel={game.description}>
             <Text
               adjustsFontSizeToFit
@@ -102,7 +102,7 @@ const Card: React.FC<CardInterface> = ({game, width}) => {
               className="bg-amber-950 w-full h-3/5 rounded-full justify-center items-center"
               onPressIn={handlePressIn}
               onPressOut={handlePressOut}
-              activeOpacity={0.8}
+              activeOpacity={0.9}
               accessibilityRole="button"
               accessibilityLabel={`Play ${game.title}`}
               accessibilityHint="Tap to start the game">

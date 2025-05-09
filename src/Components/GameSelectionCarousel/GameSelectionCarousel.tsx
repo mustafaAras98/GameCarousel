@@ -37,7 +37,7 @@ const GameSelectionCarousel: React.FC<GameSelectionCarouselI> = ({
   }, []);
 
   return (
-    <View className="flex-1 bg-lightbackground dark:bg-darkbackground items-center">
+    <View className="flex-1 items-center">
       <Animated.ScrollView
         horizontal
         onScroll={onScroll}
