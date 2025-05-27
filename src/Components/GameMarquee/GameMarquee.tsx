@@ -29,6 +29,9 @@ import {Colors} from '../../Constants/Colors';
 
 import Tooltip from '../Tooltip';
 import {PositionType} from '../Tooltip/Tooltip';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {gameManager} from '../../Screens/Games/GameManager';
+import {RootStackParamList} from '../../Navigation/Utils/NavigationTypes';
 
 interface MeasureElementProps<T> {
   data: T[];
@@ -273,12 +276,18 @@ const GameItem = React.memo(
       clearTooltipInfo();
     };
 
+    const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+    const handlePress = () => {
+      gameManager.startGameFromId(game.id, navigation);
+    };
+
     return (
       <View
         style={[styles.gameShadow, {height: parentHeight, width: parentHeight}]}
         className="p-2">
         <TouchableOpacity
           ref={touchableRef}
+          onPress={handlePress}
           onPressIn={handlePressIn}
           onPressOut={handlePressOut}
           className="p-1 bg-lighttext dark:bg-darktext rounded-full justify-center items-center"

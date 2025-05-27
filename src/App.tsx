@@ -1,4 +1,4 @@
-import {StatusBar, SafeAreaView} from 'react-native';
+import {StatusBar, SafeAreaView, StyleSheet} from 'react-native';
 import React, {useEffect} from 'react';
 import {ThemeType, useThemeStore} from './Stores/themeStore';
 import {Colors} from './Constants/Colors';
@@ -26,15 +26,17 @@ const App = () => {
     }
   }, [isDarkMode, colorScheme, setColorScheme]);
 
+  const statusBarColor = isDarkMode
+    ? Colors.DarkTheme.Background
+    : Colors.LightTheme.Background;
+
   return (
     <GestureHandlerRootView>
-      <SafeAreaView className={`flex-1 ${isDarkMode ? 'dark' : ''}`}>
+      <SafeAreaView
+        style={styles.SafeAreaView}
+        className={`flex-1 ${isDarkMode ? 'dark' : ''}`}>
         <StatusBar
-          backgroundColor={
-            isDarkMode
-              ? Colors.DarkTheme.Background
-              : Colors.LightTheme.Background
-          }
+          backgroundColor={statusBarColor}
           barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         />
         <AppNavigation />
@@ -44,3 +46,9 @@ const App = () => {
 };
 
 export default App;
+
+const styles = StyleSheet.create({
+  SafeAreaView: {
+    //paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+  },
+});
