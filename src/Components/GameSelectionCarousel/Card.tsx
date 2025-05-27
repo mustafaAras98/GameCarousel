@@ -7,6 +7,8 @@ import {
 } from 'react-native';
 import React from 'react';
 
+import {gameManager} from '../../Screens/Games/GameManager';
+
 import {GamesType} from '../../Models/Games';
 import {Colors} from '../../Constants/Colors';
 
@@ -19,6 +21,8 @@ import Animated, {
   withSpring,
   withTiming,
 } from 'react-native-reanimated';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {RootStackParamList} from '../../Navigation/Utils/NavigationTypes';
 
 const {SoundModule} = NativeModules;
 
@@ -26,6 +30,8 @@ interface CardInterface {
   game: GamesType;
   width: number;
 }
+
+type GameListScreenNavigationProp = NavigationProp<RootStackParamList>;
 
 const Card: React.FC<CardInterface> = ({game, width}) => {
   const marginH = width / 24;
@@ -39,6 +45,12 @@ const Card: React.FC<CardInterface> = ({game, width}) => {
       transform: [{scale: buttonScale.value}],
     };
   });
+
+  const navigation = useNavigation<GameListScreenNavigationProp>();
+
+  const handlePress = () => {
+    gameManager.startGameFromId(game.id, navigation);
+  };
 
   const handlePressIn = () => {
     buttonScale.value = withSpring(0.95, {
@@ -99,7 +111,11 @@ const Card: React.FC<CardInterface> = ({game, width}) => {
             className="flex w-full h-full justify-center items-center"
             style={animatedButtonStyle}>
             <TouchableOpacity
-              className="bg-amber-950 w-full h-3/5 rounded-full justify-center items-center"
+              className={`${
+                game.isPublished ? 'bg-amber-950' : 'bg-commondisabled'
+              }  w-full h-3/5 rounded-full justify-center items-center`}
+              disabled={!game.isPublished}
+              onPress={handlePress}
               onPressIn={handlePressIn}
               onPressOut={handlePressOut}
               activeOpacity={0.9}
@@ -107,7 +123,7 @@ const Card: React.FC<CardInterface> = ({game, width}) => {
               accessibilityLabel={`Play ${game.title}`}
               accessibilityHint="Tap to start the game">
               <Text className="text-base text-darktext dark:text-darktext font-medium align-middle text-center">
-                Oyna
+                {game.isPublished ? `Play ${game.title}` : 'Coming Soon'}
               </Text>
             </TouchableOpacity>
           </Animated.View>
@@ -122,7 +138,7 @@ export default React.memo(Card);
 const style = (isDarkTheme: boolean) =>
   StyleSheet.create({
     cardShadow: {
-      shadowColor: isDarkTheme ? Colors.DarkTheme.text : Colors.LightTheme.text,
+      shadowColor: isDarkTheme ? Colors.DarkTheme.Text : Colors.LightTheme.Text,
       shadowOffset: {
         width: 0,
         height: 1,

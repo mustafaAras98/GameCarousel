@@ -34,4 +34,22 @@ export const Colors = {
       Off: '#343d4a',
     },
   },
+  Games: {
+    Snake: {
+      backgroundColor1: {
+        paleBlue: '#E6F7FF',
+        paleGreen: '#E8F5E9',
+        paleOrange: '#FFF3E0',
+        paleGray: '#DBDBDB',
+        paleYellow: '#CCD5AE',
+      },
+      backgroundColor2: {
+        paleBlue: '#E6F7FF',
+        paleGreen: '#E8F5E9',
+        paleOrange: '#FFF3E0',
+        paleGray: '#DBDBDB',
+        paleYellow: '#E9EDC9',
+      },
+    },
+  },
 };
