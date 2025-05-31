@@ -10,10 +10,7 @@ export type BottomTabParamList = {
 export type RootStackParamList = {
   TabNavigation: NavigatorScreenParams<BottomTabParamList>;
   SnakeGameScreen: undefined;
-  ChessGameScreen: undefined;
-  RouletteGameScreen: undefined;
-  BlackjackGameScreen: undefined;
-  CardMemoGameScreen: undefined;
+  RockPaperScissorScreen: undefined;
 };
 
 export type RootStackNavigationProp = NavigationProp<RootStackParamList>;
