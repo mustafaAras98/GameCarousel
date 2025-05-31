@@ -300,7 +300,7 @@ const RockPaperScissor = () => {
   );
 };
 
-export default RockPaperScissor;
+export default React.memo(RockPaperScissor);
 
 const styles = StyleSheet.create({
   keyShadow: {
