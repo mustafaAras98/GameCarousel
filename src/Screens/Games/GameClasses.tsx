@@ -16,3 +16,15 @@ export class SnakeGame implements IGame {
     console.log(`${this.gameName} stopped.`);
   }
 }
+export class RockPaperScissorGame implements IGame {
+  gameName = 'RockPaperScissor';
+  gameId = 'rockpaperscissor';
+
+  startGame(navigation: GameNavigationProp): void {
+    navigation.navigate('RockPaperScissorScreen');
+  }
+
+  stopGame(): void {
+    console.log(`${this.gameName} stopped.`);
+  }
+}

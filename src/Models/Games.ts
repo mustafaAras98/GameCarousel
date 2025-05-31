@@ -15,8 +15,17 @@ export const games = [
     title: 'Snake',
     color: '#B3E5FC',
     description:
-      'Sürekli hareket eden bir yılanı kontrol et. Yemekleri topla ve puan kazan.',
+      'Control a constantly moving snake. Collect food and earn points.',
     imgSrc: require('../Assets/Images/snake.png'),
+    isPublished: true,
+  },
+  {
+    id: 'rockpaperscissor',
+    title: 'Rock Paper Scissor',
+    color: '#D3D3FA',
+    description:
+      'A classic rock-paper-scissors game. Rock beats scissors, scissors beat paper, and paper beats rock.',
+    imgSrc: require('../Assets/Images/rockpaperscissor.png'),
     isPublished: true,
   },
   {

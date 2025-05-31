@@ -4,6 +4,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import Snake from '../Screens/Games/Snake';
+import RockPaperScissor from '../Screens/Games/RockPaperScissor';
 
 import TabNavigation from './TabNavigation';
 import {RootStackParamList} from './Utils/NavigationTypes';
@@ -44,6 +45,13 @@ const AppNavigation = () => {
             component={Snake}
             options={{
               title: 'Snake Game',
+            }}
+          />
+          <Stack.Screen
+            name="RockPaperScissorScreen"
+            component={RockPaperScissor}
+            options={{
+              title: 'Rock Paper Scissor Game',
             }}
           />
         </Stack.Group>
