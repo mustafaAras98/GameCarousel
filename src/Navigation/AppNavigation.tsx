@@ -10,6 +10,7 @@ import TabNavigation from './TabNavigation';
 import {RootStackParamList} from './Utils/NavigationTypes';
 import {ThemeType, useThemeStore} from '../Stores/themeStore';
 import {Colors} from '../Constants/Colors';
+import MathQuiz from '../Screens/Games/MathQuiz';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -52,6 +53,13 @@ const AppNavigation = () => {
             component={RockPaperScissor}
             options={{
               title: 'Rock Paper Scissor Game',
+            }}
+          />
+          <Stack.Screen
+            name="MathQuizScreen"
+            component={MathQuiz}
+            options={{
+              title: 'Math Quiz Game',
             }}
           />
         </Stack.Group>

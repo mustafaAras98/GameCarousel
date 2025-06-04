@@ -29,6 +29,15 @@ export const games = [
     isPublished: true,
   },
   {
+    id: 'mathquiz',
+    title: 'Math Quiz',
+    color: '#4D96FF',
+    description:
+      'An arithmetic game involving simple operations like addition and subtraction, featuring random questions to practice mental calculation.',
+    imgSrc: require('../Assets/Images/mathquiz.png'),
+    isPublished: true,
+  },
+  {
     id: 'chess',
     title: 'Chess',
     color: '#FF6B6B',
@@ -88,15 +97,6 @@ export const games = [
     color: '#D65DB1',
     description:
       'Zar atılarak rastgele sayılar elde edilir. Şansa dayalı küçük oyunlarda temel bileşen olarak kullanılabilir.',
-    imgSrc: require('../Assets/Images/comingsoon.png'),
-    isPublished: false,
-  },
-  {
-    id: 'mathquiz',
-    title: 'Math Quiz',
-    color: '#4D96FF',
-    description:
-      'Toplama, çıkarma gibi basit işlemler üzerinden rastgele sorularla zihinsel işlem yapma oyunu.',
     imgSrc: require('../Assets/Images/comingsoon.png'),
     isPublished: false,
   },

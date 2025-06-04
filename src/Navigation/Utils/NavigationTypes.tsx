@@ -11,6 +11,7 @@ export type RootStackParamList = {
   TabNavigation: NavigatorScreenParams<BottomTabParamList>;
   SnakeGameScreen: undefined;
   RockPaperScissorScreen: undefined;
+  MathQuizScreen: undefined;
 };
 
 export type RootStackNavigationProp = NavigationProp<RootStackParamList>;
