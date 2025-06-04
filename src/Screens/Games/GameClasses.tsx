@@ -28,3 +28,15 @@ export class RockPaperScissorGame implements IGame {
     console.log(`${this.gameName} stopped.`);
   }
 }
+export class MathQuizGame implements IGame {
+  gameName = 'MathQuiz';
+  gameId = 'mathquiz';
+
+  startGame(navigation: GameNavigationProp): void {
+    navigation.navigate('MathQuizScreen');
+  }
+
+  stopGame(): void {
+    console.log(`${this.gameName} stopped.`);
+  }
+}

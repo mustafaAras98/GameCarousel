@@ -27,12 +27,12 @@ const GameLogoSlider: React.FC<GamesInterface> = ({x, width, height}) => {
           const translateX = interpolate(
             x.value,
             [(index - 1) * width, index * width, (index + 1) * width],
-            [width / 2.5, 0, -width / 2.5]
+            [width / 2.75, 0, -width / 2.75]
           );
           const scale = interpolate(
             x.value,
             [(index - 1) * width, index * width, (index + 1) * width],
-            [0.6, 1, 0.6]
+            [0.5, 1, 0.5]
           );
           return {
             transform: [{translateX}, {scale}],
