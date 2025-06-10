@@ -1,6 +1,11 @@
 // gameManager.ts
 import {IGame} from './GameInterface';
-import {MathQuizGame, RockPaperScissorGame, SnakeGame} from './GameClasses';
+import {
+  BlackJackGame,
+  MathQuizGame,
+  RockPaperScissorGame,
+  SnakeGame,
+} from './GameClasses';
 import {NavigationProp} from '@react-navigation/native';
 import {RootStackParamList} from '../../Navigation/Utils/NavigationTypes';
 
@@ -13,6 +18,7 @@ class GameManager {
     this.games.set('snake', new SnakeGame());
     this.games.set('rockpaperscissor', new RockPaperScissorGame());
     this.games.set('mathquiz', new MathQuizGame());
+    this.games.set('blackjack', new BlackJackGame());
   }
 
   startGameFromId(gameId: string, navigation: GameNavigationProp): void {

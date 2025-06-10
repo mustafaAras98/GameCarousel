@@ -11,7 +11,7 @@ const Home = () => {
   return (
     <SwipeableTabWrapper>
       <View className="flex-1 h-screen w-screen bg-lightbg dark:bg-darkbg">
-        <View style={{height: height * 0.6, marginVertical: height * 0.05}}>
+        <View style={{height: height * 0.6, marginVertical: height * 0.02}}>
           <GameSelectionCarousel cardHeight={height * 0.6} />
         </View>
         <View style={{height: height * 0.15}}>

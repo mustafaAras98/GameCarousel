@@ -3,63 +3,65 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
+import Header from '../Components/Header';
+
 import Snake from '../Screens/Games/Snake';
 import RockPaperScissor from '../Screens/Games/RockPaperScissor';
+import MathQuiz from '../Screens/Games/MathQuiz';
+import Blackjack from '../Screens/Games/BlackJack';
 
 import TabNavigation from './TabNavigation';
 import {RootStackParamList} from './Utils/NavigationTypes';
-import {ThemeType, useThemeStore} from '../Stores/themeStore';
-import {Colors} from '../Constants/Colors';
-import MathQuiz from '../Screens/Games/MathQuiz';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const AppNavigation = () => {
-  const theme = useThemeStore((state) => state.theme);
-  const isDarkMode = theme === ThemeType.DarkTheme;
   return (
     <NavigationContainer>
       <Stack.Navigator
         initialRouteName="TabNavigation"
-        screenOptions={{headerShown: false, gestureEnabled: true}}>
-        <Stack.Screen name="TabNavigation" component={TabNavigation} />
-        <Stack.Group
-          screenOptions={{
-            headerShown: true,
-            headerTitleAlign: 'center',
-            headerStyle: {
-              backgroundColor: isDarkMode
-                ? Colors.DarkTheme.Background
-                : Colors.LightTheme.Background,
-            },
-            headerTintColor: isDarkMode
-              ? Colors.DarkTheme.Text
-              : Colors.LightTheme.Text,
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            },
-            headerShadowVisible: true,
-            headerBackTitle: 'Back',
-          }}>
+        screenOptions={{
+          gestureEnabled: true,
+          // eslint-disable-next-line react/no-unstable-nested-components
+          header: ({route, options}) => {
+            const showBackButton = route.name !== 'TabNavigation';
+            const title = options?.title ?? route.name ?? 'Game';
+
+            return <Header showBackButton={showBackButton} title={title} />;
+          },
+        }}>
+        <Stack.Screen
+          options={{title: 'Game Carousel'}}
+          name="TabNavigation"
+          component={TabNavigation}
+        />
+        <Stack.Group>
           <Stack.Screen
             name="SnakeGameScreen"
             component={Snake}
             options={{
-              title: 'Snake Game',
+              title: 'Snake',
             }}
           />
           <Stack.Screen
             name="RockPaperScissorScreen"
             component={RockPaperScissor}
             options={{
-              title: 'Rock Paper Scissor Game',
+              title: 'Rock Paper Scissor',
             }}
           />
           <Stack.Screen
             name="MathQuizScreen"
             component={MathQuiz}
             options={{
-              title: 'Math Quiz Game',
+              title: 'Math Quiz',
+            }}
+          />
+          <Stack.Screen
+            name="BlackJackScreen"
+            component={Blackjack}
+            options={{
+              title: 'BlackJack',
             }}
           />
         </Stack.Group>
