@@ -40,3 +40,15 @@ export class MathQuizGame implements IGame {
     console.log(`${this.gameName} stopped.`);
   }
 }
+export class BlackJackGame implements IGame {
+  gameName = 'BlackJack';
+  gameId = 'blackjack';
+
+  startGame(navigation: GameNavigationProp): void {
+    navigation.navigate('BlackJackScreen');
+  }
+
+  stopGame(): void {
+    console.log(`${this.gameName} stopped.`);
+  }
+}

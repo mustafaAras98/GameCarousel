@@ -12,6 +12,7 @@ export type RootStackParamList = {
   SnakeGameScreen: undefined;
   RockPaperScissorScreen: undefined;
   MathQuizScreen: undefined;
+  BlackJackScreen: undefined;
 };
 
 export type RootStackNavigationProp = NavigationProp<RootStackParamList>;
