@@ -20,6 +20,7 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import GameStatusCard from '../../../Components/GameStatusCard';
+import scoreStore from '../../../Stores/scoreStore';
 
 interface Question {
   num1: number;
@@ -40,7 +41,7 @@ const correctAnswerPoints = 10;
 const maxAddSubNumber = 50;
 const maxMultiplayerNumber = 12;
 const maxDivisionNumber = 9;
-
+const gameId = 'mathquiz';
 const MathQuiz: React.FC = () => {
   const [currentQuestion, setCurrentQuestion] = useState<Question | null>(null);
   const [userAnswer, setUserAnswer] = useState<string>('');
@@ -60,6 +61,11 @@ const MathQuiz: React.FC = () => {
   const buttonScale = useSharedValue(1);
   const feedbackOpacity = useSharedValue(0);
   const feedbackTranslateY = useSharedValue(0);
+
+  const bestScoreForThisGame = scoreStore((state) =>
+    state.getBestScore(gameId)
+  );
+  const setBestScore = scoreStore((state) => state.setBestScore);
 
   useEffect(() => {
     SoundModule.loadSound('failSound', 'fail_sound');
@@ -185,7 +191,12 @@ const MathQuiz: React.FC = () => {
   const endGame = useCallback(() => {
     setIsGameActive(false);
     Keyboard.dismiss();
+
+    if (gameStats.correctAnswers > bestScoreForThisGame) {
+      setBestScore(gameId, gameStats.correctAnswers);
+    }
     setShowGameEndCard(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
