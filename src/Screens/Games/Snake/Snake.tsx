@@ -35,6 +35,11 @@ import Bottomsheet from './Component/Bottomsheet';
 
 import {ThemeType, useThemeStore} from '../../../Stores/themeStore';
 import scoreStore from '../../../Stores/scoreStore';
+import coinStore from '../../../Stores/coinStore';
+import {
+  bestScorePointMultiplier,
+  winPointMultiplier,
+} from '../../../Constants/Constants';
 
 interface Position {
   x: number;
@@ -59,7 +64,7 @@ const {height: screenHeight, width: screenWidth} = Dimensions.get('window');
 const {SoundModule} = NativeModules;
 const gameId = games[0].id;
 
-const DEFAULT_GAME_SPEED = 80;
+const DEFAULT_GAME_SPEED = 40;
 const DEFAULT_GRID_SIZE_COL = 12;
 const DEFAULT_GRID_SIZE_ROW = 16;
 const INITIAL_DIRECTION = DIRECTIONS.RIGHT;
@@ -107,6 +112,8 @@ export default function SnakeGame(): JSX.Element {
 
   const theme = useThemeStore((state) => state.theme);
   const isDarkMode = theme === ThemeType.DarkTheme;
+
+  const addCoins = coinStore((state) => state.addCoins);
 
   const bestScoreForThisGame = scoreStore((state) =>
     state.getBestScore(gameId)
@@ -219,7 +226,13 @@ export default function SnakeGame(): JSX.Element {
       ) {
         setIsGameOver(true);
         SoundModule.playSound('gameOver');
-        setBestScore(gameId, score);
+        if (score > bestScoreForThisGame) {
+          addCoins(score * bestScorePointMultiplier);
+          setBestScore(gameId, score);
+        } else {
+          addCoins(score * winPointMultiplier);
+        }
+
         return;
       }
 
@@ -256,6 +269,8 @@ export default function SnakeGame(): JSX.Element {
     setBestScore,
     score,
     generateFood,
+    addCoins,
+    bestScoreForThisGame,
   ]);
 
   useEffect(() => {

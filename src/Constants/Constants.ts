@@ -92,3 +92,7 @@ export const scaledPadding = {
 // Platform bilgisi
 export const isIOS = Platform.OS === 'ios';
 export const isAndroid = Platform.OS === 'android';
+
+//Win Points
+export const winPointMultiplier = 5;
+export const bestScorePointMultiplier = 10;
