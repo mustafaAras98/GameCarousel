@@ -21,7 +21,11 @@ import Animated, {
 import Icon from '@react-native-vector-icons/fontawesome';
 
 import {Colors} from '../../../Constants/Colors';
-import {scale} from '../../../Constants/Constants';
+import {
+  bestScorePointMultiplier,
+  scale,
+  winPointMultiplier,
+} from '../../../Constants/Constants';
 
 import maleIdle from './Assets/male_idle.png';
 import malePaper from './Assets/male_paper.png';
@@ -31,7 +35,9 @@ import femaleIdle from './Assets/female_idle.png';
 import femalePaper from './Assets/female_paper.png';
 import femaleRock from './Assets/female_rock.png';
 import femaleScissor from './Assets/female_scissors.png';
+
 import scoreStore from '../../../Stores/scoreStore';
+import coinStore from '../../../Stores/coinStore';
 
 enum RockPaperScissorType {
   Idle = 0,
@@ -56,6 +62,7 @@ const RockPaperScissor = () => {
     state.getBestScore(gameId)
   );
   const setBestScore = scoreStore((state) => state.setBestScore);
+  const addCoins = coinStore((state) => state.addCoins);
 
   useEffect(() => {
     SoundModule.loadSound('paperWin', 'paper_win');
@@ -116,6 +123,7 @@ const RockPaperScissor = () => {
     const playerRule = gameRules[playerSelection];
     if (playerRule.beats === computerSelection) {
       SoundModule.playSound(playerRule.winSound);
+      addCoins(1 * winPointMultiplier);
       return GameResult.Win;
     }
 
@@ -140,6 +148,7 @@ const RockPaperScissor = () => {
       setConsecutiveScore((prev) => prev + 1);
     } else if (result === GameResult.Lose) {
       if (consecutiveScore > bestScoreForThisGame) {
+        addCoins(bestScorePointMultiplier * 2);
         setBestScore(gameId, consecutiveScore);
       }
       setConsecutiveScore(0);

@@ -20,7 +20,13 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import GameStatusCard from '../../../Components/GameStatusCard';
+
 import scoreStore from '../../../Stores/scoreStore';
+import coinStore from '../../../Stores/coinStore';
+import {
+  bestScorePointMultiplier,
+  winPointMultiplier,
+} from '../../../Constants/Constants';
 
 interface Question {
   num1: number;
@@ -42,6 +48,7 @@ const maxAddSubNumber = 50;
 const maxMultiplayerNumber = 12;
 const maxDivisionNumber = 9;
 const gameId = 'mathquiz';
+
 const MathQuiz: React.FC = () => {
   const [currentQuestion, setCurrentQuestion] = useState<Question | null>(null);
   const [userAnswer, setUserAnswer] = useState<string>('');
@@ -55,17 +62,20 @@ const MathQuiz: React.FC = () => {
   const [isGameActive, setIsGameActive] = useState<boolean>(false);
   const [showGameEndCard, setShowGameEndCard] = useState<boolean>(false);
   const [isProcessingAnswer, setIsProcessingAnswer] = useState<boolean>(false);
+  const [isKeyboardVisible, setKeyboardVisible] = useState<boolean>(false);
 
   const questionScale = useSharedValue(1);
   const scoreScale = useSharedValue(1);
   const buttonScale = useSharedValue(1);
   const feedbackOpacity = useSharedValue(0);
   const feedbackTranslateY = useSharedValue(0);
+  const contentScale = useSharedValue(1);
 
   const bestScoreForThisGame = scoreStore((state) =>
     state.getBestScore(gameId)
   );
   const setBestScore = scoreStore((state) => state.setBestScore);
+  const addCoins = coinStore((state) => state.addCoins);
 
   useEffect(() => {
     SoundModule.loadSound('failSound', 'fail_sound');
@@ -193,11 +203,14 @@ const MathQuiz: React.FC = () => {
     Keyboard.dismiss();
 
     if (gameStats.correctAnswers > bestScoreForThisGame) {
+      addCoins(gameStats.correctAnswers * bestScorePointMultiplier);
       setBestScore(gameId, gameStats.correctAnswers);
+    } else {
+      addCoins(gameStats.correctAnswers * winPointMultiplier);
     }
     setShowGameEndCard(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [gameStats.correctAnswers, gameStats.score]);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -221,6 +234,32 @@ const MathQuiz: React.FC = () => {
     };
   }, [isGameActive, timeLeft, endGame]);
 
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      () => {
+        setKeyboardVisible(true);
+      }
+    );
+    const keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      () => {
+        setKeyboardVisible(false);
+      }
+    );
+
+    return () => {
+      keyboardDidShowListener.remove();
+      keyboardDidHideListener.remove();
+    };
+  }, []);
+
+  useEffect(() => {
+    contentScale.value = withTiming(isKeyboardVisible ? 0.8 : 1, {
+      duration: 250,
+    });
+  }, [isKeyboardVisible, contentScale]);
+
   const questionAnimatedStyle = useAnimatedStyle(() => ({
     transform: [{scale: questionScale.value}],
   }));
@@ -237,6 +276,12 @@ const MathQuiz: React.FC = () => {
     opacity: feedbackOpacity.value,
     transform: [{translateY: feedbackTranslateY.value}],
   }));
+
+  const contentAnimatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{scale: contentScale.value}],
+    };
+  });
 
   const handleButtonPress = () => {
     buttonScale.value = withSequence(
@@ -312,7 +357,9 @@ const MathQuiz: React.FC = () => {
       <KeyboardAvoidingView
         className="flex-1"
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-        <View className="flex-1 justify-center items-center px-6">
+        <Animated.View
+          className="flex-1 justify-center items-center px-6"
+          style={contentAnimatedStyle}>
           {currentQuestion && (
             <>
               <Animated.View
@@ -362,9 +409,9 @@ const MathQuiz: React.FC = () => {
               </Animated.View>
             </>
           )}
-        </View>
+        </Animated.View>
       </KeyboardAvoidingView>
-      <View className="px-6 pb-6">
+      <Animated.View className="px-6 pb-6" style={contentAnimatedStyle}>
         <View className="bg-lighttext/20 dark:bg-darktext/20 rounded-xl p-4 flex-row justify-around">
           <View className="items-center">
             <Text className="text-lighttext dark:text-darktext font-bold text-lg">
@@ -391,7 +438,7 @@ const MathQuiz: React.FC = () => {
             </Text>
           </View>
         </View>
-      </View>
+      </Animated.View>
       {showGameEndCard && (
         <View className="flex-1 absolute w-full h-full px-6 items-center">
           <GameStatusCard
