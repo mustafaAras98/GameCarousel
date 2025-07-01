@@ -33,8 +33,17 @@ export const games = [
     title: 'Math Quiz',
     color: '#4D96FF',
     description:
-      'An arithmetic game involving simple operations like addition and subtraction, featuring random questions to practice mental calculation.',
+      'An arithmetic game involving simple operations like addition, subtraction, multiplication and division.',
     imgSrc: require('../Assets/Images/mathquiz.png'),
+    isPublished: true,
+  },
+  {
+    id: 'blackjack',
+    title: 'BlackJack',
+    color: '#F2CCA3',
+    description:
+      'The aim is to get a hand value as close to 21 as possible without exceeding it.',
+    imgSrc: require('../Assets/Images/blackjack.png'),
     isPublished: true,
   },
   {
@@ -53,15 +62,6 @@ export const games = [
     description:
       'Bir çark ve top üzerinden oynanan şans oyunu. Oyuncular sayı, renk veya aralık üzerine bahis yapar. Topun durduğu yer sonucu belirler.',
     imgSrc: require('../Assets/Images/roulette.png'),
-    isPublished: false,
-  },
-  {
-    id: 'blackjack',
-    title: 'BlackJack',
-    color: '#F2CCA3',
-    description:
-      'Amaç 21’e en yakın el değerine ulaşmak. Oyuncular ve krupiye kart çeker, 21’i geçmeden en yüksek sayıya ulaşmaya çalışır.',
-    imgSrc: require('../Assets/Images/blackjack.png'),
     isPublished: false,
   },
   {

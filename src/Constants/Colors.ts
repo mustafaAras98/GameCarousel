@@ -3,6 +3,7 @@ export const Colors = {
   Common: {
     Black: '#000000',
     White: '#FFFFFF',
+    Red: '#DC2F02',
     Disabled: '#6b7579',
   },
   DarkTheme: {
