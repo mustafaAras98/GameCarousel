@@ -440,7 +440,7 @@ const MathQuiz: React.FC = () => {
         </View>
       </Animated.View>
       {showGameEndCard && (
-        <View className="flex-1 absolute w-full h-full px-6 items-center">
+        <View className="absolute w-5/6 h-full justify-center self-center">
           <GameStatusCard
             title="Game Over!"
             content={
@@ -460,6 +460,7 @@ const MathQuiz: React.FC = () => {
             buttonFunction={startGame}
             buttonIconName="refresh"
             buttonLabel="Play Again"
+            opacity={0.9}
           />
         </View>
       )}

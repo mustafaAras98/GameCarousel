@@ -24,6 +24,7 @@ module.exports = {
         darksecondary: Colors.DarkTheme.Secondary,
         darkaccent: Colors.DarkTheme.Accent,
         commondisabled: Colors.Common.Disabled,
+        commonred: Colors.Common.Red,
       },
     },
   },

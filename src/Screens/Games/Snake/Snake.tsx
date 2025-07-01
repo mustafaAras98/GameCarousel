@@ -612,23 +612,27 @@ export default function SnakeGame(): JSX.Element {
         </View>
       </View>
       {isGameOver && (
-        <GameStatusCard
-          buttonFunction={initGame}
-          buttonIconName="refresh"
-          title="Game Over"
-          content={gameOverContent()}
-          buttonLabel="refresh"
-        />
+        <View className="absolute w-5/6 h-3/4 justify-center items-center">
+          <GameStatusCard
+            buttonFunction={initGame}
+            buttonIconName="refresh"
+            title="Game Over"
+            content={gameOverContent()}
+            buttonLabel="refresh"
+          />
+        </View>
       )}
       {isPaused && !isGameOver && !isBottomSheetOpen && (
-        <GameStatusCard
-          buttonFunction={togglePause}
-          buttonIconName="play"
-          title="Game Paused"
-          content={gamePausedContent()}
-          opacity={0.9}
-          buttonLabel="play"
-        />
+        <View className="absolute w-5/6 h-3/4 justify-center items-center">
+          <GameStatusCard
+            buttonFunction={togglePause}
+            buttonIconName="play"
+            title="Game Paused"
+            content={gamePausedContent()}
+            opacity={0.9}
+            buttonLabel="play"
+          />
+        </View>
       )}
       {isBottomSheetOpen && (
         <Bottomsheet
